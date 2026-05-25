@@ -1,4 +1,4 @@
-from jarvis.actions import (
+from jarvis.core.services.actions import (
     say_hello,
     tell_time,
     tell_name,
@@ -8,6 +8,7 @@ from jarvis.actions import (
     open_google,
     open_youtube,
     open_github,
+    open_live_news,
     remember_name,
     recall_name,
     remember_city,
@@ -19,8 +20,9 @@ from jarvis.actions import (
     show_help,
     exit_jarvis,
 )
-from jarvis.ai import ask_ai
-from jarvis.utils import normalize_command, resolve_alias, fuzzy_match_command
+from jarvis.core.services.ai import ask_ai
+from jarvis.core.services.training_services import TrainingService
+from jarvis.core.services.utils import normalize_command, fuzzy_match_command
 
 
 def get_commands():
@@ -35,9 +37,8 @@ def get_commands():
         "open google": open_google,
         "open youtube": open_youtube,
         "open github": open_github,
-        "remember my name": remember_name,
+        "open live news": open_live_news,
         "what is my name": recall_name,
-        "remember my city": remember_city,
         "what is my city": recall_city,
         "help": show_help,
         "bye": exit_jarvis,
@@ -49,18 +50,32 @@ BUILT_IN_COMMANDS = set(get_commands().keys())
 
 
 def handle_flexible_command(command, memory):
+    trainer = TrainingService(memory)
+
+    raw_command = command.strip()
     command = normalize_command(command)
-    command = resolve_alias(command)
+    command = trainer.resolve_alias(command)
 
     commands = get_commands()
 
     if command in commands:
         return commands[command](memory)
 
-    fuzzy_match = fuzzy_match_command(command, BUILT_IN_COMMANDS)
-    if fuzzy_match and fuzzy_match in commands:
-        print(f"Did you mean: {fuzzy_match}?")
-        return commands[fuzzy_match](memory)
+    if command.startswith("remember that my name is "):
+        value = raw_command[len("remember that my name is "):].strip()
+        return remember_name(memory, value)
+
+    if command.startswith("remember that my city is "):
+        value = raw_command[len("remember that my city is "):].strip()
+        return remember_city(memory, value)
+
+    if command.startswith("alias "):
+        raw = command.replace("alias ", "", 1).strip()
+        if " as " in raw:
+            actual, alias = raw.split(" as ", 1)
+            ok, msg = trainer.add_alias(alias.strip(), actual.strip())
+            return msg
+        return "Use alias like: alias open google as google"
 
     if command.startswith("remember that "):
         return remember_fact(command, memory)
@@ -74,5 +89,11 @@ def handle_flexible_command(command, memory):
     if command.startswith("search youtube for "):
         return search_youtube(command, memory)
 
-    answer = ask_ai(command)
-    print(answer)
+    if "live news" in command or "geopolitics" in command:
+        return open_live_news(memory)
+
+    fuzzy_match = fuzzy_match_command(command, BUILT_IN_COMMANDS)
+    if fuzzy_match and fuzzy_match in commands:
+        return f"Did you mean: {fuzzy_match}?\n{commands[fuzzy_match](memory)}"
+
+    return ask_ai(command)

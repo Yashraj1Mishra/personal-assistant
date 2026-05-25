@@ -1,71 +1,14 @@
 from PyQt6.QtCore import Qt, QTimer, QPropertyAnimation, QEasingCurve, pyqtProperty
-from PyQt6.QtGui import QColor, QPainter, QPen, QRadialGradient, QBrush
+from PyQt6.QtGui import QColor, QPainter, QPen
 from PyQt6.QtWidgets import (
     QWidget,
     QLabel,
     QPushButton,
     QVBoxLayout,
     QGraphicsDropShadowEffect,
-    QGraphicsOpacityEffect,
 )
 
-from ui.main_window import MainWindow
-
-
-class AnimatedBackground(QWidget):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.frame = 0
-
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.next_frame)
-        self.timer.start(40)
-
-    def next_frame(self):
-        self.frame += 1
-        self.update()
-
-    def paintEvent(self, event):
-        painter = QPainter()
-        if not painter.begin(self):
-            return
-
-        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
-
-        w = self.width()
-        h = self.height()
-        cx = w // 2
-        cy = h // 2
-
-        painter.fillRect(self.rect(), QColor("#05070a"))
-
-        glow_radius = int(min(w, h) * 0.35)
-        gradient = QRadialGradient(cx, cy, glow_radius)
-        gradient.setColorAt(0.0, QColor(0, 255, 220, 35))
-        gradient.setColorAt(0.4, QColor(0, 180, 160, 18))
-        gradient.setColorAt(1.0, QColor(0, 0, 0, 0))
-        painter.setBrush(QBrush(gradient))
-        painter.setPen(Qt.PenStyle.NoPen)
-        painter.drawEllipse(cx - glow_radius, cy - glow_radius, glow_radius * 2, glow_radius * 2)
-
-        for i in range(6):
-            radius = 120 + i * 45 + ((self.frame + i * 12) % 45)
-            alpha = max(25, 120 - i * 15)
-            painter.setPen(QPen(QColor(79, 227, 193, alpha), 2))
-            painter.setBrush(Qt.BrushStyle.NoBrush)
-            painter.drawEllipse(cx - radius, cy - radius, radius * 2, radius * 2)
-
-        if w > 0:
-            for i in range(3):
-                offset = int((self.frame * (i + 1) * 0.6) % w)
-                painter.setPen(QPen(QColor(0, 255, 220, 25), 1))
-                painter.drawLine(offset, 0, offset - 180, h)
-
-        painter.setPen(QPen(QColor(0, 255, 220, 40), 1))
-        painter.drawLine(cx - 320, cy, cx + 320, cy)
-        painter.drawLine(cx, cy - 180, cx, cy + 180)
-
-        painter.end()
+from jarvis.ui.main_window import MainWindow
 
 
 class PulseLine(QWidget):
@@ -102,10 +45,11 @@ class SplashWindow(QWidget):
         super().__init__()
         self.setWindowTitle("Jarvis")
         self.setObjectName("SplashWindow")
-        self.is_transitioning = False
+        self.setWindowFlag(Qt.WindowType.FramelessWindowHint, True)
+        self.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint, True)
 
-        self.background = AnimatedBackground(self)
-        self.background.lower()
+        self.is_transitioning = False
+        self.main = None
 
         self.title = QLabel("JARVIS")
         self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -139,25 +83,22 @@ class SplashWindow(QWidget):
 
         self.setStyleSheet("""
             QWidget#SplashWindow {
-                background: transparent;
+                background-color: #05070a;
             }
             QLabel#SplashTitle {
                 color: #84ffe0;
                 font-size: 76px;
                 font-weight: 800;
                 letter-spacing: 10px;
-                background: transparent;
             }
             QLabel#SplashSubtitle {
                 color: #b8c7d9;
                 font-size: 20px;
-                background: transparent;
             }
             QLabel#SplashStatus {
                 color: #59f0d0;
                 font-size: 16px;
                 letter-spacing: 2px;
-                background: transparent;
             }
             QPushButton#StartButton {
                 background: rgba(0, 255, 220, 0.12);
@@ -209,37 +150,20 @@ class SplashWindow(QWidget):
         self.timer.timeout.connect(self.update_status)
         self.timer.start(900)
 
-        self.auto_timer = QTimer(self)
-        self.auto_timer.setSingleShot(True)
-        self.auto_timer.timeout.connect(self.launch_main)
-        self.auto_timer.start(4500)
-
-    def resizeEvent(self, event):
-        super().resizeEvent(event)
-        self.background.setGeometry(self.rect())
-
     def update_status(self):
         self.step_index = (self.step_index + 1) % len(self.status_steps)
         self.status.setText(self.status_steps[self.step_index])
 
     def launch_main(self):
-       if self.is_transitioning:
-        return
+        if self.is_transitioning:
+            return
 
         self.is_transitioning = True
         self.timer.stop()
-        self.auto_timer.stop()
-        self.background.timer.stop()
+        self.title_anim.stop()
+        self.progress_anim.stop()
 
-        self.fade_anim = QPropertyAnimation(self, b"windowOpacity")
-        self.fade_anim.setDuration(700)
-        self.fade_anim.setStartValue(1.0)
-        self.fade_anim.setEndValue(0.0)
-        self.fade_anim.setEasingCurve(QEasingCurve.Type.InOutQuad)
-        self.fade_anim.finished.connect(self.open_main_window)
-        self.fade_anim.start()
-
-    def open_main_window(self):
         self.main = MainWindow()
-        self.main.showFullScreen()
+        self.main.show()
+
         self.close()

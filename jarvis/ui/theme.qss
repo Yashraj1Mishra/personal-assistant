@@ -1,0 +1,343 @@
+QWidget#MainWindow[theme="neon"] {
+    background: #05070a;
+}
+
+QWidget#MainWindow[theme="slate"] {
+    background: #edf2f7;
+}
+
+/* Panels */
+QWidget#MainWindow[theme="neon"] QFrame#Sidebar {
+    background: #0b1016;
+    border: 1px solid rgba(127, 255, 212, 0.12);
+    border-radius: 22px;
+}
+
+QWidget#MainWindow[theme="slate"] QFrame#Sidebar {
+    background: #dfe7ef;
+    border: 1px solid #c7d4df;
+    border-radius: 22px;
+}
+
+QWidget#MainWindow[theme="neon"] QFrame#ContentWrap,
+QWidget#MainWindow[theme="neon"] QFrame#TopBar,
+QWidget#MainWindow[theme="neon"] QFrame#Card {
+    background: #0b1016;
+    border: 1px solid rgba(127, 255, 212, 0.12);
+    border-radius: 22px;
+}
+
+QWidget#MainWindow[theme="slate"] QFrame#ContentWrap,
+QWidget#MainWindow[theme="slate"] QFrame#TopBar,
+QWidget#MainWindow[theme="slate"] QFrame#Card {
+    background: #f8fbff;
+    border: 1px solid #d5e0ea;
+    border-radius: 22px;
+}
+
+/* Labels */
+QWidget#MainWindow[theme="neon"] QLabel#BrandTitle {
+    color: #84ffe0;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
+QWidget#MainWindow[theme="slate"] QLabel#BrandTitle {
+    color: #123846;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
+QWidget#MainWindow[theme="neon"] QLabel#BrandSubtitle,
+QWidget#MainWindow[theme="neon"] QLabel#SidebarStatus,
+QWidget#MainWindow[theme="neon"] QLabel#MutedLabel {
+    color: #9eb5b0;
+    font-size: 13px;
+}
+
+QWidget#MainWindow[theme="slate"] QLabel#BrandSubtitle,
+QWidget#MainWindow[theme="slate"] QLabel#SidebarStatus,
+QWidget#MainWindow[theme="slate"] QLabel#MutedLabel {
+    color: #4f6874;
+    font-size: 13px;
+}
+
+QWidget#MainWindow[theme="neon"] QLabel#PageTitle {
+    color: #eafffb;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+QWidget#MainWindow[theme="slate"] QLabel#PageTitle {
+    color: #10232b;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+QWidget#MainWindow[theme="neon"] QLabel#StatusLabel {
+    color: #59f0d0;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+QWidget#MainWindow[theme="slate"] QLabel#StatusLabel {
+    color: #17637c;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+QWidget#MainWindow[theme="neon"] QLabel#CardTitle {
+    color: #dffdf7;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+QWidget#MainWindow[theme="slate"] QLabel#CardTitle {
+    color: #10232b;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Navigation buttons */
+QWidget#MainWindow[theme="neon"] QPushButton#NavButton {
+    text-align: left;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(127, 255, 212, 0.10);
+    background: transparent;
+    color: #dffdf7;
+    font-size: 15px;
+}
+
+QWidget#MainWindow[theme="slate"] QPushButton#NavButton {
+    text-align: left;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid #cad7e2;
+    background: transparent;
+    color: #17313c;
+    font-size: 15px;
+}
+
+QWidget#MainWindow[theme="neon"] QPushButton#NavButton:checked,
+QWidget#MainWindow[theme="neon"] QPushButton#NavButton:hover {
+    background: rgba(0, 255, 220, 0.14);
+    border: 1px solid rgba(127, 255, 212, 0.28);
+}
+
+QWidget#MainWindow[theme="slate"] QPushButton#NavButton:checked,
+QWidget#MainWindow[theme="slate"] QPushButton#NavButton:hover {
+    background: #d7f0f1;
+    border: 1px solid #8ecfd1;
+}
+
+/* Main buttons */
+QWidget#MainWindow[theme="neon"] QPushButton#PrimaryButton,
+QWidget#MainWindow[theme="neon"] QPushButton#TopButton {
+    background: rgba(0, 255, 220, 0.16);
+    color: #eafffb;
+    border: 1px solid rgba(127, 255, 212, 0.35);
+    border-radius: 14px;
+    padding: 12px 18px;
+    font-size: 14px;
+}
+
+QWidget#MainWindow[theme="slate"] QPushButton#PrimaryButton,
+QWidget#MainWindow[theme="slate"] QPushButton#TopButton {
+    background: #b7ece3;
+    color: #12353c;
+    border: 1px solid #7ec9be;
+    border-radius: 14px;
+    padding: 12px 18px;
+    font-size: 14px;
+}
+
+QWidget#MainWindow[theme="neon"] QPushButton#PrimaryButton:hover,
+QWidget#MainWindow[theme="neon"] QPushButton#TopButton:hover {
+    background: rgba(0, 255, 220, 0.26);
+}
+
+QWidget#MainWindow[theme="slate"] QPushButton#PrimaryButton:hover,
+QWidget#MainWindow[theme="slate"] QPushButton#TopButton:hover {
+    background: #a7e3d9;
+}
+
+/* Secondary/action buttons */
+QWidget#MainWindow[theme="neon"] QPushButton#SecondaryButton,
+QWidget#MainWindow[theme="neon"] QPushButton#ActionButton {
+    background: rgba(255, 255, 255, 0.04);
+    color: #dffdf7;
+    border: 1px solid rgba(127, 255, 212, 0.16);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 14px;
+}
+
+QWidget#MainWindow[theme="slate"] QPushButton#SecondaryButton,
+QWidget#MainWindow[theme="slate"] QPushButton#ActionButton {
+    background: #eef4f8;
+    color: #17313c;
+    border: 1px solid #d1dce5;
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 14px;
+}
+
+QWidget#MainWindow[theme="neon"] QPushButton#SecondaryButton:hover,
+QWidget#MainWindow[theme="neon"] QPushButton#ActionButton:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+QWidget#MainWindow[theme="slate"] QPushButton#SecondaryButton:hover,
+QWidget#MainWindow[theme="slate"] QPushButton#ActionButton:hover {
+    background: #e5edf3;
+}
+
+/* Text areas and lists */
+QWidget#MainWindow[theme="neon"] QTextEdit#ChatArea,
+QWidget#MainWindow[theme="neon"] QTextEdit#LogArea,
+QWidget#MainWindow[theme="neon"] QListWidget#ListBox {
+    background: rgba(10, 14, 18, 0.94);
+    color: #dffdf7;
+    border: 1px solid rgba(127, 255, 212, 0.18);
+    border-radius: 18px;
+    padding: 10px;
+    font-size: 15px;
+}
+
+QWidget#MainWindow[theme="slate"] QTextEdit#ChatArea,
+QWidget#MainWindow[theme="slate"] QTextEdit#LogArea,
+QWidget#MainWindow[theme="slate"] QListWidget#ListBox {
+    background: #fdfefe;
+    color: #17313c;
+    border: 1px solid #d7e3ec;
+    border-radius: 18px;
+    padding: 10px;
+    font-size: 15px;
+}
+
+/* Inputs */
+QWidget#MainWindow[theme="neon"] QLineEdit#InputBox {
+    background: rgba(12, 16, 20, 0.96);
+    color: #e8fff9;
+    border: 1px solid rgba(127, 255, 212, 0.25);
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-size: 15px;
+}
+
+QWidget#MainWindow[theme="slate"] QLineEdit#InputBox {
+    background: #ffffff;
+    color: #17313c;
+    border: 1px solid #c6d6df;
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-size: 15px;
+}
+
+/* Focus states */
+QWidget#MainWindow[theme="neon"] QLineEdit#InputBox:focus,
+QWidget#MainWindow[theme="neon"] QTextEdit#ChatArea:focus,
+QWidget#MainWindow[theme="neon"] QTextEdit#LogArea:focus,
+QWidget#MainWindow[theme="neon"] QListWidget#ListBox:focus {
+    border: 1px solid rgba(127, 255, 212, 0.55);
+    background: rgba(14, 20, 26, 0.98);
+}
+
+QWidget#MainWindow[theme="slate"] QLineEdit#InputBox:focus,
+QWidget#MainWindow[theme="slate"] QTextEdit#ChatArea:focus,
+QWidget#MainWindow[theme="slate"] QTextEdit#LogArea:focus,
+QWidget#MainWindow[theme="slate"] QListWidget#ListBox:focus {
+    border: 1px solid #65bdb5;
+    background: #ffffff;
+}
+
+/* Disabled buttons */
+QWidget#MainWindow[theme="neon"] QPushButton:disabled {
+    background: rgba(255, 255, 255, 0.03);
+    color: #6d807c;
+    border: 1px solid rgba(127, 255, 212, 0.08);
+}
+
+QWidget#MainWindow[theme="slate"] QPushButton:disabled {
+    background: #edf2f6;
+    color: #8ba0aa;
+    border: 1px solid #d8e1e8;
+}
+
+/* List and text selection */
+QWidget#MainWindow[theme="neon"] QListWidget#ListBox::item:selected,
+QWidget#MainWindow[theme="neon"] QTextEdit#ChatArea,
+QWidget#MainWindow[theme="neon"] QTextEdit#LogArea {
+    selection-background-color: rgba(0, 255, 220, 0.22);
+    selection-color: #f2fffb;
+}
+
+QWidget#MainWindow[theme="slate"] QListWidget#ListBox::item:selected,
+QWidget#MainWindow[theme="slate"] QTextEdit#ChatArea,
+QWidget#MainWindow[theme="slate"] QTextEdit#LogArea {
+    selection-background-color: #cceeed;
+    selection-color: #17313c;
+}
+
+/* Page stack */
+QWidget#MainWindow[theme="neon"] QStackedWidget#PageStack,
+QWidget#MainWindow[theme="neon"] QStackedWidget#PageStack QWidget {
+    background: transparent;
+}
+
+QWidget#MainWindow[theme="slate"] QStackedWidget#PageStack,
+QWidget#MainWindow[theme="slate"] QStackedWidget#PageStack QWidget {
+    background: transparent;
+}
+
+/* Scrollbars */
+QWidget#MainWindow[theme="neon"] QScrollBar:vertical {
+    background: transparent;
+    width: 10px;
+    margin: 6px 0 6px 0;
+}
+
+QWidget#MainWindow[theme="neon"] QScrollBar::handle:vertical {
+    background: rgba(127, 255, 212, 0.22);
+    border-radius: 5px;
+    min-height: 24px;
+}
+
+QWidget#MainWindow[theme="neon"] QScrollBar::handle:vertical:hover {
+    background: rgba(127, 255, 212, 0.36);
+}
+
+QWidget#MainWindow[theme="neon"] QScrollBar::add-line:vertical,
+QWidget#MainWindow[theme="neon"] QScrollBar::sub-line:vertical,
+QWidget#MainWindow[theme="neon"] QScrollBar::add-page:vertical,
+QWidget#MainWindow[theme="neon"] QScrollBar::sub-page:vertical {
+    background: none;
+    border: none;
+}
+
+QWidget#MainWindow[theme="slate"] QScrollBar:vertical {
+    background: transparent;
+    width: 10px;
+    margin: 6px 0 6px 0;
+}
+
+QWidget#MainWindow[theme="slate"] QScrollBar::handle:vertical {
+    background: #c7d7e2;
+    border-radius: 5px;
+    min-height: 24px;
+}
+
+QWidget#MainWindow[theme="slate"] QScrollBar::handle:vertical:hover {
+    background: #adc4d3;
+}
+
+QWidget#MainWindow[theme="slate"] QScrollBar::add-line:vertical,
+QWidget#MainWindow[theme="slate"] QScrollBar::sub-line:vertical,
+QWidget#MainWindow[theme="slate"] QScrollBar::add-page:vertical,
+QWidget#MainWindow[theme="slate"] QScrollBar::sub-page:vertical {
+    background: none;
+    border: none;
+}

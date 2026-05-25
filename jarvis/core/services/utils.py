@@ -13,20 +13,24 @@ ALIASES = {
     "open up youtube": "open youtube",
     "open up github": "open github",
     "quit": "exit",
+    "close jarvis": "exit",
     "help me": "help",
     "what can you do": "help",
 }
 
 
-def normalize_command(command):
-    return " ".join(command.lower().strip().split())
+def normalize_command(command: str) -> str:
+    return " ".join((command or "").lower().strip().split())
 
 
-def resolve_alias(command):
+def resolve_alias(command: str) -> str:
     return ALIASES.get(command, command)
 
 
-def fuzzy_match_command(command, command_choices, cutoff=75):
+def fuzzy_match_command(command: str, command_choices, cutoff: int = 75):
+    if not command or not command_choices:
+        return None
+
     match = process.extractOne(
         command,
         command_choices,
